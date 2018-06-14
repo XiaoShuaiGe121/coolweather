@@ -22,7 +22,7 @@ public class CoolWeatherDB {
 
     private CoolWeatherOpenHelper helper;
     private SQLiteDatabase db;
-    private CoolWeatherDB coolWeatherDB;
+    private static CoolWeatherDB coolWeatherDB;
 
 
     private CoolWeatherDB(Context context) {
@@ -30,7 +30,7 @@ public class CoolWeatherDB {
         db = helper.getWritableDatabase();
     }
 
-    public synchronized CoolWeatherDB getInstance(Context context) {
+    public synchronized  static  CoolWeatherDB getInstance(Context context) {
         if (coolWeatherDB == null) {
             coolWeatherDB = new CoolWeatherDB(context);
         }
