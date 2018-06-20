@@ -1,13 +1,12 @@
 package app.weather.com.coolweather.model;
 
 /**
- * Created by Administrator on 2018/6/14.
+ * Created by Administrator on 2018/6/15.
  */
 
 public class City {
     private int id;
     private String cityName;
-    private String cityCode;
     private int provinceId;
 
     public int getId() {
@@ -26,14 +25,6 @@ public class City {
         this.cityName = cityName;
     }
 
-    public String getCityCode() {
-        return cityCode;
-    }
-
-    public void setCityCode(String cityCode) {
-        this.cityCode = cityCode;
-    }
-
     public int getProvinceId() {
         return provinceId;
     }
@@ -42,15 +33,9 @@ public class City {
         this.provinceId = provinceId;
     }
 
-    public City(int id, String cityName, String cityCode, int provinceId) {
-
-        this.id = id;
-        this.cityName = cityName;
-        this.cityCode = cityCode;
-        this.provinceId = provinceId;
-    }
-
-    public City() {
-
+    @Override
+    public boolean equals(Object obj) {
+        City c = (City)obj;
+        return c.getCityName().equals(this.cityName);
     }
 }

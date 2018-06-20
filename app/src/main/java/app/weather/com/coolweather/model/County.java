@@ -1,13 +1,22 @@
 package app.weather.com.coolweather.model;
 
 /**
- * Created by Administrator on 2018/6/14.
+ * Created by Administrator on 2018/6/17.
  */
 
 public class County {
     private int id;
     private String countyName;
     private String countyCode;
+
+    public String getCountyCode() {
+        return countyCode;
+    }
+
+    public void setCountyCode(String countyCode) {
+        this.countyCode = countyCode;
+    }
+
     private int cityId;
 
     public int getId() {
@@ -26,14 +35,6 @@ public class County {
         this.countyName = countyName;
     }
 
-    public String getCountyCode() {
-        return countyCode;
-    }
-
-    public void setCountyCode(String countyCode) {
-        this.countyCode = countyCode;
-    }
-
     public int getCityId() {
         return cityId;
     }
@@ -42,15 +43,9 @@ public class County {
         this.cityId = cityId;
     }
 
-    public County(int id, String countyName, String countyCode, int cityId) {
-
-        this.id = id;
-        this.countyName = countyName;
-        this.countyCode = countyCode;
-        this.cityId = cityId;
-    }
-
-    public County() {
-
+    @Override
+    public boolean equals(Object obj) {
+        County c= (County) obj;
+        return c.getCountyName().equals(this.countyName);
     }
 }

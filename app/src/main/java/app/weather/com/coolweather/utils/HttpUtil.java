@@ -1,6 +1,5 @@
 package app.weather.com.coolweather.utils;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -12,9 +11,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import app.weather.com.coolweather.db.CoolWeatherDB;
+import app.weather.com.coolweather.model.CitiesResponse;
 import app.weather.com.coolweather.model.City;
 import app.weather.com.coolweather.model.County;
 import app.weather.com.coolweather.model.Province;
@@ -65,69 +66,6 @@ public class HttpUtil {
         }).start();
     }
 
-    /**
-     * 解析response字符串，将解析后的Province对象存入数据库
-     *
-     * @param db
-     * @param response
-     * @return
-     */
-    public synchronized static boolean handleProvinceResponse(CoolWeatherDB db, String response) {
-        if (!TextUtils.isEmpty(response)) {
-            Gson gson = new Gson();
-            List<Province> provinceList = gson.fromJson(response, new TypeToken<List<Province>>() {
-            }.getType());
-            for (Province province : provinceList) {
-                db.saveProvince(province);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 解析response字符串，将解析后的City对象存入数据库
-     *
-     * @param db
-     * @param response
-     * @param provinceId
-     * @return
-     */
-    public synchronized static boolean handleCityResponse(CoolWeatherDB db, String response,int provinceId) {
-        if (!TextUtils.isEmpty(response)) {
-            Gson gson = new Gson();
-            List<City> cityList = gson.fromJson(response, new TypeToken<List<City>>() {
-            }.getType());
-            for (City city : cityList) {
-                city.setProvinceId(provinceId);
-                db.saveCity(city);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 解析response字符串，将解析后的County对象存入数据库
-     *
-     * @param db
-     * @param response
-     * @param cityId
-     * @return
-     */
-    public synchronized static boolean handleCountyResponse(CoolWeatherDB db, String response,int cityId) {
-        if (!TextUtils.isEmpty(response)) {
-            Gson gson = new Gson();
-            List<County> countyList = gson.fromJson(response, new TypeToken<List<County>>() {
-            }.getType());
-            for (County county : countyList) {
-                county.setCityId(cityId);
-                db.saveCounty(county);
-            }
-            return true;
-        }
-        return false;
-    }
 
 
 
